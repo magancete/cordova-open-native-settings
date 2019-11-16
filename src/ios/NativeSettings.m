@@ -184,6 +184,15 @@
 	else if ([key isEqualToString:@"mobile_data"]) {
 		result = [self do_open:[prefix stringByAppendingString:@"root=MOBILE_DATA_SETTINGS_ID"]];
 	}
+    else if ([key isEqualToString:@"pass"]) {
+        if (SYSTEM_VERSION_LESS_THAN(@"13.1")) {
+			result = [self do_open:prefix];
+		}
+		else {
+			result = [self do_open:[prefix stringByAppendingString:@"root=ACCOUNTS_AND_PASSWORDS"]];
+		}
+		
+	}
 	else {
 		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid Action"];
 	}
